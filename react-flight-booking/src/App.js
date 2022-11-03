@@ -1,29 +1,53 @@
-import React, { useState } from 'react';
-import './App.css';
-import FlightPriceList from './components/FightPrice/FlightPriceList';
-
+import React, { useState } from "react";
+import "./App.css";
+import Form from "./components/Form/Form";
+import FlightList from "./Pages/FlightList";
 
 function App() {
+  const datery = {
+    origin: "",
+    destination: "",
+    date: "",
+    group: "",
+  };
 
-  const [flightsPrice,setFlightsPrice] = useState([]);
+  const [dataQuery, setQueryData] = useState(datery);
 
-  async function fetchFlightsHandler(){
-    const response = await fetch('http://localhost:8080/flights/lisboa/madrid/groupndate?date=2022-11-01&group=2')
-    
-    const data = await response.json();
-    setFlightsPrice(data);
+  function formHandler(data) {
+    setQueryData(data);
   }
 
   return (
-  <React.Fragment>
+    <React.Fragment>
       <section>
-        <button onClick={fetchFlightsHandler}>Fetch Movies</button>
-      </section>
-      <section>
-        <FlightPriceList flightsPrice={flightsPrice} />
+        <Form onSearchFormConfirm={formHandler}></Form>
+        <FlightList data={dataQuery}></FlightList>
       </section>
     </React.Fragment>
   );
 }
 
 export default App;
+
+// return (
+//   <React.Fragment>
+//       <section>
+//         <Form onSearchFormConfirm={formHandler}></Form>
+//         <button type="submit" form='searchForm' onClick={fetchFlightsHandler} o>Fetch Movies</button>
+//       </section>
+//       <Route path="/prices">
+//         <FlightPriceList flightsPrice={flightsPrice} link={link} />
+//       </Route>
+
+//     </React.Fragment>
+
+// setLink(
+//   "http://localhost:8080/flights/" +
+//     data.origin +
+//     "/" +
+//     data.destination +
+//     "/groupndate?date=" +
+//     data.date +
+//     "&group=" +
+//     data.group
+// );

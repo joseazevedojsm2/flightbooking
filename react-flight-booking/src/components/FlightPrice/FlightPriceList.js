@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './FlightList.module.css';
-import FlightPrice from './FlightPrice';
+import FlightPrice from './FlightPriceItem';
 
 const FlightPriceList = (props) => {
   return (
@@ -13,6 +13,7 @@ const FlightPriceList = (props) => {
           price={flightPrice.price}
         />
       ))}
+      {console.log(props.link)}
     </ul>
   );
 };
