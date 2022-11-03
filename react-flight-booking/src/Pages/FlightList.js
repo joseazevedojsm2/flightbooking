@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FlightPriceList from "../components/FlightPrice/FlightPriceList";
 
 function FlightList(props) {
+  
   console.log(props);
 
   const [flightsPrice, setFlightsPrice] = useState([]);

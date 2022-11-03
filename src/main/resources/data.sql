@@ -9,6 +9,9 @@ insert into groups_age(group_age) values ('>2<9')
 insert into groups_age(group_age) values ('>9')
 insert into price (price,additional_cost,fk_flight,fk_groups_age) values (200.0,30.0,1,2)
 
+insert into passanger(f_name,GROUP_AGE) values ('John',2)
+insert into booking(fk_passanger,fk_price) values (1,1)
+
 
 --insert into flight(departure_date,fk_route,fk_company) values ('2022-11-02',1,1)
 --insert into flight(departure_date,fk_route,fk_company) values ('2022-11-03',1,1)

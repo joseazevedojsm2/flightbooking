@@ -2,6 +2,8 @@ package com.solera.flightbooking.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Price {
     @Id
@@ -16,6 +18,8 @@ public class Price {
     @JoinColumn(name = "fk_groupsAge",nullable = false)
     private GroupsAge groupsAge;
 
+    @OneToMany(mappedBy = "price",cascade = CascadeType.ALL)
+    private List<Booking> booking;
     private Double price;
     private Double additionalCost;
 
