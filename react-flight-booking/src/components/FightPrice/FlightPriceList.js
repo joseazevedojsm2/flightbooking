@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Flight from './Flight';
 import classes from './FlightList.module.css';
+import FlightPrice from './FlightPrice';
 
-const FlightList = (props) => {
+const FlightPriceList = (props) => {
   return (
     <ul className={classes['movies-list']}>
-      {props.flights.map((flightPrice) => (
-        <Flight
+      {props.flightsPrice.map((flightPrice) => (
+        <FlightPrice
           id={flightPrice.id}
           flight = {flightPrice.flight}
           price={flightPrice.price}
@@ -17,4 +17,4 @@ const FlightList = (props) => {
   );
 };
 
-export default FlightList;
+export default FlightPriceList;

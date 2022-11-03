@@ -1,20 +1,17 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
-import { useState } from 'react';
-import React from 'react';
-import FlightList from './components/FlightList';
+import FlightPriceList from './components/FightPrice/FlightPriceList';
 
 
 function App() {
 
-  const [flights,setFlights] = useState([]);
+  const [flightsPrice,setFlightsPrice] = useState([]);
 
-  function fetchFlightsHandler(){
-    fetch('http://localhost:8080/flights/prices').then(response =>{
-      return response.json();
-    }).then(data => {
-      setFlights(data);
-    })
+  async function fetchFlightsHandler(){
+    const response = await fetch('http://localhost:8080/flights/lisboa/madrid/groupndate?date=2022-11-01&group=2')
+    
+    const data = await response.json();
+    setFlightsPrice(data);
   }
 
   return (
@@ -23,7 +20,7 @@ function App() {
         <button onClick={fetchFlightsHandler}>Fetch Movies</button>
       </section>
       <section>
-        <FlightList flights={flights} />
+        <FlightPriceList flightsPrice={flightsPrice} />
       </section>
     </React.Fragment>
   );
