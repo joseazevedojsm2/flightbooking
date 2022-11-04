@@ -17,6 +17,8 @@ public class Flight {
 
     private LocalDate arrivalDate,departureDate;
     private LocalTime arrivalTime,departureTime;
+    private Boolean allowLuggage;
+
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "fk_company", nullable = false)
@@ -92,6 +94,14 @@ public class Flight {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public Boolean getAllowLuggage() {
+        return allowLuggage;
+    }
+
+    public void setAllowLuggage(Boolean allowLuggage) {
+        this.allowLuggage = allowLuggage;
     }
 
     @Override

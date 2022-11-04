@@ -11,9 +11,10 @@ const FlightPriceList = (props) => {
           id={flightPrice.id}
           flight = {flightPrice.flight}
           price={flightPrice.price}
+          addCost={flightPrice.additionalCost}
         />
       ))}
-      {console.log(props.link)}
+      {console.log(props)}
     </ul>
   );
 };

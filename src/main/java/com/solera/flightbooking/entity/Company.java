@@ -12,7 +12,6 @@ public class Company {
 
     private String name;
 
-    private Boolean allowLuggage;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Flight> flight;
@@ -20,17 +19,15 @@ public class Company {
     public Company() {
     }
 
-    public Company(String company, Boolean allowLuggage) {
+    public Company(String company) {
         this.name = company;
 
-        this.allowLuggage = allowLuggage;
     }
 
-    public Company(int id, String company, Boolean allowLuggage) {
+    public Company(int id, String company) {
         this.id = id;
         this.name = company;
 
-        this.allowLuggage = allowLuggage;
     }
 
     public int getId() {
@@ -49,20 +46,11 @@ public class Company {
         this.name = name;
     }
 
-    public Boolean getAllowLuggage() {
-        return allowLuggage;
-    }
 
-    public void setAllowLuggage(Boolean allowLuggage) {
-        this.allowLuggage = allowLuggage;
-    }
-
-    @Override
     public String toString() {
         return "Company{" +
                 "id=" + id +
                 ", company='" + name + '\'' +
-                ", allowLuggage=" + allowLuggage +
                 '}';
     }
 }

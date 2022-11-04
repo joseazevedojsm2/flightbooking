@@ -11,10 +11,10 @@ const FlightPriceItem = (props) => {
         <Flight flight={props.flight}> </Flight>
       </h2>
       
-      <p>{props.price}</p>
+      <p>{props.price} $</p>
 
-      <Link to={`/pFlight/${props.id}`}>
-        <button>Select</button>
+      <Link to={`/pFlight/${props.id}`}  state={{price:props.price, addCost:props.addCost}}>
+        <button>View details</button>
       </Link>
 
     </li>

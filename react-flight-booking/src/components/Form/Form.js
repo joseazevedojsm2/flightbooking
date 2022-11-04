@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AirLine from "./AirLine";
 import City from "./City";
 import "./Form.css";
 
@@ -9,6 +10,8 @@ const Form = (props) => {
   const[arr,setArr] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
   const [enteredGroup,setEnteredGroup] = useState("3");
+  const [airline, setAirline] = useState("");
+  const [bags,setBags] = useState("");
 
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
@@ -25,19 +28,29 @@ const Form = (props) => {
     setArr(arrival);
   };
 
+  const airlineHandler = (airline) => {
+    setAirline(airline);
+  };
+
+  const bagshangeHandler = (event) => {
+    setBags(event.target.value);
+  };
+
   function submitHandler(event){
     event.preventDefault();
     const data = {
       origin:dep,
       destination:arr,
       date:enteredDate,
-      group:enteredGroup
+      group:enteredGroup,
+      airline:airline,
+      bags:bags
     };
     props.onSearchFormConfirm(data);
   }
 
   return (
-    <form id="searchForm"  onMouseLeave={submitHandler}>
+    <form id="searchForm"  onBlur={submitHandler} >
       <City type={"Departure City"} onCityChange={departureHandler}></City>
       <City type={"Arrival City"} onCityChange={arrivalHandler}></City>
       <div class="elem-group inlined">
@@ -46,7 +59,7 @@ const Form = (props) => {
       </div>
       <div class="elem-group inlined">
         <label for="checkout-date">Return date</label>
-        <input type="date" id="checkout-date" name="checkout" ></input>
+        <input type="date" id="checkout-date" name="checkout" disabled></input>
       </div>
       <div class="elem-group">
         <label for="room-selection">Select Age group</label>
@@ -55,6 +68,13 @@ const Form = (props) => {
           <option value="1">{"< 2"} years</option>
           <option value="2">between 2 and 9 years</option>
         </select>
+
+        <label for="group" >Bags:</label>
+        <input type="radio" id="bags" value="bags" onChange={bagshangeHandler} />
+
+        <label for="airline-selection">AirLine</label>
+        <AirLine  onAirLineChange={airlineHandler}></AirLine>
+
       </div>
       {/* <button type="submit"> Fetch Flights </button> */}
     </form>

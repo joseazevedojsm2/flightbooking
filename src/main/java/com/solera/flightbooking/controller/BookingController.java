@@ -7,23 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/booking")
 @CrossOrigin
 public class BookingController {
     @Autowired
     private BookingService service;
 
-    @GetMapping("/{idBooking}/{name}")
-    public Booking getBookingByFlightAndNamePassanger(@PathVariable int idBooking,@PathVariable String name){
-        return service.getBooking(idBooking,name);
+    @GetMapping("/analytics/{idFlight}/{idPassanger}")
+    public Booking getBookingByFlightAndNamePassanger(@PathVariable int idFlight,@PathVariable int idPassanger){
+        return service.getBooking(idFlight,idPassanger);
     }
 
-    @PostMapping("/{paidFlight}/{id}")
+    @PostMapping("/booking/{paidFlight}/{id}")
     public Booking insertBookingByFlightAndidPassanger(@PathVariable int paidFlight,@PathVariable int id){
         return service.createBooking(paidFlight,id);
     }
 
-    @PostMapping("/passanger")
+    @PostMapping("/booking/passanger")
     public Passanger insertPassanger(@RequestBody Passanger passanger){
         return service.createPassanger(passanger);
     }

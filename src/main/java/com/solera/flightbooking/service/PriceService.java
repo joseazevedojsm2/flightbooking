@@ -1,7 +1,9 @@
 package com.solera.flightbooking.service;
 
+import com.solera.flightbooking.entity.Company;
 import com.solera.flightbooking.entity.Flight;
 import com.solera.flightbooking.entity.Price;
+import com.solera.flightbooking.repository.CompanyRepository;
 import com.solera.flightbooking.repository.GroupsAgeRepository;
 import com.solera.flightbooking.repository.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,16 @@ import java.util.stream.Collectors;
 public class PriceService {
     private PriceRepository repository;
     private GroupsAgeRepository groupsAgeRepository;
+    private CompanyRepository companyRepository;
     private FlightService flightService;
 
     @Autowired
-    public PriceService(PriceRepository priceRepository,GroupsAgeRepository groupsAgeRepository, FlightService flightService){
+    public PriceService(PriceRepository priceRepository,GroupsAgeRepository groupsAgeRepository,
+                        FlightService flightService, CompanyRepository companyRepository){
         repository = priceRepository;
         this.flightService = flightService;
         this.groupsAgeRepository = groupsAgeRepository;
+        this.companyRepository = companyRepository;
     }
 
     public List<Price> getAllPrices(){
@@ -52,7 +57,7 @@ public class PriceService {
     }
 
     public List<Price> getAllPricesByDateAndGroupAndFlight(String origin, String destination,
-                                                           LocalDate departure, int group){
+                                                           LocalDate departure, int group,String bags,String airplane){
 
         List<Price> prices = repository.findAll().stream()
                 .filter(price -> {
@@ -72,6 +77,24 @@ public class PriceService {
         prices = prices.stream().filter(price -> finalFlights.contains(price.getFlight())).collect(Collectors.toList());
         System.out.println(prices);
 
+        if(bags!=null && airplane!=null)
+                return prices.stream().filter(price -> {
+                    return price.getFlight().getAllowLuggage()==true &&
+                            price.getFlight().getCompany().getName().equalsIgnoreCase(airplane);
+                }).collect(Collectors.toList());
+
+        if(bags!=null)
+            if(airplane==null)
+                return prices.stream().filter(price -> {
+                    return price.getFlight().getAllowLuggage().booleanValue() ;
+                }).collect(Collectors.toList());
+
+        if(airplane!=null)
+            if(bags==null)
+                return prices.stream().filter(price -> {
+                    return price.getFlight().getCompany().getName().equalsIgnoreCase(airplane);
+                }).collect(Collectors.toList());
+
         return prices;
     }
 
@@ -90,5 +113,9 @@ public class PriceService {
 
         Price newPrice = repository.save(price);
         return newPrice;
+    }
+
+    public List<Company> getAllCompanys() {
+        return companyRepository.findAll();
     }
 }

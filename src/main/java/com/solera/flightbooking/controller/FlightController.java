@@ -29,4 +29,6 @@ public class FlightController {
     public Flight insertFlight(@PathVariable String name, @RequestBody Flight flight){
         return service.createFlight(flight,name);
     }
+
+
 }

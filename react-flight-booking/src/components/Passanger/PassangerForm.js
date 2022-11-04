@@ -3,13 +3,14 @@ import React, { useState } from "react";
 
 
 const PassangerForm = (props) => {
-
+  console.log(props);
   const[fName,setFName] = useState("");
   const[lName,setLName] = useState("");
   const [nacionality, setNacionality] = useState("");
   const [identification,setIdentification] = useState("");
   const [bags, setBags] = useState("");
   const [group,setGroup] = useState("");
+  const [price,setPrice] = useState(props.price);
 
   const fNameChangeHandler = (event) => {
     setFName(event.target.value);
@@ -28,6 +29,7 @@ const PassangerForm = (props) => {
   };
 
   const bagshangeHandler = (event) => {
+    setPrice(props.total);
     setBags(event.target.value);
   };
 
@@ -50,10 +52,9 @@ const PassangerForm = (props) => {
 
 
   return (
-    <form onMouseLeave={submitHandler}>
+    <form onBlur={submitHandler}>
 
       <h1>Passanger Details</h1>
-      <h1>{props.id}</h1>
 
       <fieldset>
         <label for="fname">First Name:</label>
@@ -69,7 +70,7 @@ const PassangerForm = (props) => {
         <input type="text" id="identification" name="identify" onChange={indentChangeHandler} />
 
         <label for="group" >Bags:</label>
-        <input class="light" type="radio" id="bags" value="bags"  onChange={bagshangeHandler} />
+        <input class="light" type="radio" id="bags" value="bags" onChange={bagshangeHandler} />
 
         <label for="group" class="light">  Age Group     </label>
       
@@ -83,6 +84,10 @@ const PassangerForm = (props) => {
           <option value="1">{"< 2"} years</option>
           <option value="2">between 2 and 9 years</option>
         </select>
+      </fieldset>
+
+      <fieldset>
+        <h1>{price}$</h1>
       </fieldset>
     </form>
   );

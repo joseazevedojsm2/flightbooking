@@ -56,7 +56,7 @@ public class FlightServiceTest {
     @ValueSource(strings = {"AirFrance"})
     void whenUserGetAllFlights_withCorrectCompanyName_shouldFail(String companyName){
         Flight flight = new Flight(1, LocalDate.now(),LocalDate.now(),LocalTime.now(),LocalTime.now());
-        Company company = new Company(companyName,true);
+        Company company = new Company(companyName);
         flight.setCompany(company);
 
         Mockito.when(repository.findAll()).thenReturn(List.of(flight));
@@ -72,7 +72,7 @@ public class FlightServiceTest {
         LocalDate dateDeparture = LocalDate.parse(dateDep);
 
         Flight flight = new Flight(1, LocalDate.now(),dateDeparture,LocalTime.now(),LocalTime.now());
-        Company company = new Company(companyName,true);
+        Company company = new Company(companyName);
         flight.setCompany(company);
 
         Mockito.when(repository.findAll()).thenReturn(List.of());
@@ -89,7 +89,7 @@ public class FlightServiceTest {
         Route route = new Route(new Place(2,origin),new Place(1,destination));
 
         Flight flight = new Flight(1, LocalDate.now(),dateDeparture,LocalTime.now(),LocalTime.now());
-        Company company = new Company(companyName,true);
+        Company company = new Company(companyName);
         flight.setCompany(company);
         flight.setRoute(route);
 
@@ -106,7 +106,7 @@ public class FlightServiceTest {
     void whenUserCreatesFlight_withWrongDates_shouldFail(){
         LocalDate dateDeparture = LocalDate.parse("2022-10-31");
         Flight flight = new Flight(1, dateDeparture,dateDeparture,LocalTime.now(),LocalTime.now());
-        Company company = new Company("AirFrance",true);
+        Company company = new Company("AirFrance");
         flight.setCompany(company);
 
         Flight newFlight = service.createFlight(flight,flight.getCompany().getName());
@@ -118,7 +118,7 @@ public class FlightServiceTest {
     void whenUserCreatesFlight_withWrongCompanyName_shouldFail(){
         LocalDate dateDeparture = LocalDate.parse("2022-11-30");
         Flight flight = new Flight(1, dateDeparture,dateDeparture,LocalTime.now(),LocalTime.now());
-        Company company = new Company("AirFrance",true);
+        Company company = new Company("AirFrance");
         flight.setCompany(company);
 
         Mockito.when(companyRepository.findAll()).thenReturn(List.of());
@@ -132,7 +132,7 @@ public class FlightServiceTest {
     void whenUserCreatesFlight_withNoRoute_shouldFail(){
         LocalDate dateDeparture = LocalDate.parse("2022-11-30");
         Flight flight = new Flight(1, dateDeparture,dateDeparture,LocalTime.now(),LocalTime.now());
-        Company company = new Company("AirFrance",true);
+        Company company = new Company("AirFrance");
         flight.setCompany(company);
 
         Flight newFlight = service.createFlight(flight,flight.getCompany().getName());
@@ -144,7 +144,7 @@ public class FlightServiceTest {
     void whenUserCreatesFlight_withCorrect_shouldSucess(){
         LocalDate dateDeparture = LocalDate.parse("2022-11-30");
         Flight flight = new Flight(1, dateDeparture,dateDeparture,LocalTime.now(),LocalTime.now());
-        Company company = new Company("AirFrance",true);
+        Company company = new Company("AirFrance");
         flight.setCompany(company);
 
         Mockito.when(routeRepository.findAll()).thenReturn(List.of());

@@ -69,4 +69,5 @@ public class RouteService {
     public List<Place> getAllPlaces() {
         return repositoryPlace.findAll();
     }
+
 }

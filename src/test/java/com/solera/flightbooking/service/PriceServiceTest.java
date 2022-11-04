@@ -33,7 +33,7 @@ public class PriceServiceTest {
 
     @Test
     void whenUserRequestPrices_withWrongCompany_shouldSucess(){
-        Company company = new Company(1,"AirFrance",true);
+        Company company = new Company(1,"AirFrance");
 
         Mockito.when(repository.findAll()).thenReturn(List.of());
         List<Price> prices = service.getAllPricesByCompany(company.getName());
@@ -42,7 +42,7 @@ public class PriceServiceTest {
     }
     @Test
     void whenUserRequestPrices_withCorrectCompany_shouldSucess(){
-        Company company = new Company(1,"AirFrance",true);
+        Company company = new Company(1,"AirFrance");
 
         Flight flight = new Flight();
         flight.setCompany(company);

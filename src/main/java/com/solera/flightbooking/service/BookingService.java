@@ -26,6 +26,8 @@ public class BookingService {
     }
 
     public Passanger createPassanger(Passanger passanger){
+        if(passanger.getfName().isEmpty()||passanger.getlName().isEmpty())
+            return null;
         return passengerRepository.save(passanger);
     }
 
@@ -42,11 +44,10 @@ public class BookingService {
 
         return booking;
     }
-
-    public Booking getBooking(int id, String name){
+    public Booking getBooking(int idFlight, int idPassanger) {
         return repository.findAll().stream().filter(booking -> {
-           return booking.getPassanger().getfName().equals(name) &&
-                    booking.getId() == id;
+            return booking.getPassanger().getId()==idPassanger &&
+                    booking.getPrice().getFlight().getId() == idFlight;
         }).findFirst().get();
     }
 }

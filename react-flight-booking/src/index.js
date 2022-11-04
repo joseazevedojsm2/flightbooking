@@ -13,8 +13,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="pFlight/:priceId" element={<PassangerDetails />} />
-        <Route path="pFlight/:priceId/:idPassanger" element={<BookingDetails />} />
+        <Route path="pFlight/:priceId" element={<PassangerDetails price={100} addCost={200}/>} />
+        <Route path="pFlight/:idFlight/:idPassanger" element={<BookingDetails />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

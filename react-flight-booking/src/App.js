@@ -4,14 +4,7 @@ import Form from "./components/Form/Form";
 import FlightList from "./Pages/FlightList";
 
 function App() {
-  const datery = {
-    origin: "",
-    destination: "",
-    date: "",
-    group: "",
-  };
-
-  const [dataQuery, setQueryData] = useState(datery);
+  const [dataQuery, setQueryData] = useState();
 
   function formHandler(data) {
     setQueryData(data);

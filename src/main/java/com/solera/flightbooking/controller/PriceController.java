@@ -1,5 +1,6 @@
 package com.solera.flightbooking.controller;
 
+import com.solera.flightbooking.entity.Company;
 import com.solera.flightbooking.entity.Price;
 import com.solera.flightbooking.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,17 @@ public class PriceController {
 
     @GetMapping("/{origin}/{destination}/groupndate")
     public List<Price> retrieveAllPricesByCompany(@PathVariable String origin,@PathVariable String destination,
-                                                 @RequestParam String date,@RequestParam int group) {
-        return service.getAllPricesByDateAndGroupAndFlight(origin,destination, LocalDate.parse(date),group);
+                                                 @RequestParam String date,@RequestParam int group,
+                                                  @RequestParam(required = false) String bags,@RequestParam(required = false) String airline) {
+        return service.getAllPricesByDateAndGroupAndFlight(origin,destination, LocalDate.parse(date),group,bags,airline);
     }
 
     @PostMapping("/{name}/price")
     public Price insertPrice(@RequestBody Price price, @RequestParam int flightNumber, @PathVariable String name){
         return service.createPrice(price,flightNumber,name);
+    }
+    @GetMapping("/airplanes")
+    public List<Company> retrieveAllCompany(){
+        return service.getAllCompanys();
     }
 }
